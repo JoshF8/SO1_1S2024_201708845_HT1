@@ -1,0 +1,23 @@
+# Ignorar make
+*.o
+*.out
+*.exe
+build/
+
+# Ignorar React
+node_modules/
+npm-debug.log
+
+# Ignorar Wails ?
+vendor/
+web/
+
+# Ignorar Go
+*.exe
+*.o
+*.a
+*.so
+
+# Ignorar C kernel 
+*.ko
+*.mod.*
