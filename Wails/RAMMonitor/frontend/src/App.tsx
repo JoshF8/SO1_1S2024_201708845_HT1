@@ -1,28 +1,28 @@
 import { useState } from 'react';
-import logo from './assets/images/logo-universal.png';
+
 import './App.css';
-import { Greet } from "../wailsjs/go/main/App";
 import PieComponent from './PieComponent'
 import { RAMData } from './types';
 
-function App() {
+const App: React.FC = () => {
     const totalRAM: number = 16000000
-    const freeRAM: number = 1500000
-    const freeRAMPercentage: number = freeRAM / totalRAM
-    
-    var state:number;
-    if (freeRAMPercentage > 0.5){
+    const freeRAM: number = 11000000
+    const usedRAMPercentage: number = 1 - (freeRAM / totalRAM)
+
+    console.log(usedRAMPercentage);
+    var state: number;
+    if (usedRAMPercentage <= 0.5) {
         state = 0
-    }else if(freeRAMPercentage > 0.25){
+    } else if (usedRAMPercentage <= 0.25) {
         state = 1
-    }else if(freeRAMPercentage > 0.10){
+    } else if (usedRAMPercentage <= 0.10) {
         state = 2
-    }else{
+    } else {
         state = 3
     }
 
     var ramDataVar: RAMData = {
-        freeRAM: freeRAMPercentage,
+        usedRAM: usedRAMPercentage,
         state: state
     }
 

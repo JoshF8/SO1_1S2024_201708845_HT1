@@ -11,6 +11,8 @@ import (
 //go:embed all:frontend/dist
 var assets embed.FS
 
+var width int
+
 func main() {
 	// Create an instance of the app structure
 	app := NewApp()
@@ -18,8 +20,8 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:  "RAMMonitor",
-		Width:  1024,
-		Height: 768,
+		Width:  app.width,
+		Height: app.height,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
