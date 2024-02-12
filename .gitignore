@@ -21,3 +21,6 @@ web/
 # Ignorar C kernel 
 *.ko
 *.mod.*
+
+
+
