@@ -1043,6 +1043,12 @@ deps_/home/josh/Documents/Docs/SOPES/LAB_REPO/SO1_1S2024_201708845_HT1/Kernel/ma
     $(wildcard include/config/MEMORY_BALLOON) \
     $(wildcard include/config/BALLOON_COMPACTION) \
     $(wildcard include/config/ZSWAP) \
+  include/linux/proc_fs.h \
+    $(wildcard include/config/PROC_PID_ARCH_STATUS) \
+  include/linux/seq_file.h \
+  include/linux/string_helpers.h \
+  include/linux/ctype.h \
+  include/linux/string_choices.h \
 
 /home/josh/Documents/Docs/SOPES/LAB_REPO/SO1_1S2024_201708845_HT1/Kernel/main.o: $(deps_/home/josh/Documents/Docs/SOPES/LAB_REPO/SO1_1S2024_201708845_HT1/Kernel/main.o)
 

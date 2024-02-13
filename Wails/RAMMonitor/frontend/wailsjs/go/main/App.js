@@ -5,3 +5,7 @@
 export function GetWindowSize() {
   return window['go']['main']['App']['GetWindowSize']();
 }
+
+export function ReadRamInfo() {
+  return window['go']['main']['App']['ReadRamInfo']();
+}

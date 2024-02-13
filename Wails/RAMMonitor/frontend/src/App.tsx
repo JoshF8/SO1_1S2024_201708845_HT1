@@ -1,30 +1,32 @@
-import { useState } from 'react';
-
-import './App.css';
+import React, { useEffect, useState } from 'react';
 import PieComponent from './PieComponent'
-import { RAMData } from './types';
+import { RAMData, RAMInfo } from './types';
+import { ReadRamInfo } from '../wailsjs/go/main/App'
+import './App.css';
 
 const App: React.FC = () => {
-    const totalRAM: number = 16000000
-    const freeRAM: number = 11000000
-    const usedRAMPercentage: number = 1 - (freeRAM / totalRAM)
 
-    console.log(usedRAMPercentage);
-    var state: number;
-    if (usedRAMPercentage <= 0.5) {
-        state = 0
-    } else if (usedRAMPercentage <= 0.25) {
-        state = 1
-    } else if (usedRAMPercentage <= 0.10) {
-        state = 2
-    } else {
-        state = 3
-    }
-
-    var ramDataVar: RAMData = {
-        usedRAM: usedRAMPercentage,
-        state: state
-    }
+    //para ramInfo
+    const [ramDataVar, setRamDataVar] = useState<RAMData>({ usedRAM: 0, state: 0 })
+    useEffect(() => {
+        const interval = setInterval(() => {
+            ReadRamInfo().then((result: RAMInfo) => {
+                var usedRAM: number = 1 - (result.freeRAM / result.totalRAM);
+                var state: number
+                if (usedRAM <= 0.5) {
+                    state = 0
+                } else if (usedRAM <= 0.25) {
+                    state = 1
+                } else if (usedRAM <= 0.10) {
+                    state = 2
+                } else {
+                    state = 3
+                }
+                setRamDataVar({usedRAM:usedRAM, state: state});
+            });
+        }, 10000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div id="App">

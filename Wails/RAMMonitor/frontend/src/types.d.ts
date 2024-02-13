@@ -1,9 +1,11 @@
-import { Key } from "react"
-
-
 export interface RAMData {
     usedRAM: number,
     state: warningState
+}
+
+export interface RAMInfo {
+    totalRAM: number,
+    freeRAM: number
 }
 
 export interface windowSize {

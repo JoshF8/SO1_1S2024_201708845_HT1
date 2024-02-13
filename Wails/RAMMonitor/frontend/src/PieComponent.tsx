@@ -10,7 +10,7 @@ const data = [
 ];
 const COLORS = ['#4CAF50', '#FFEB3B', '#FF9800', '#F44336'];
 
-const PieComponent: React.FC<RAMData> = (ramData) => {
+const PieComponent: React.FC<RAMData> = (ramData:RAMData) => {
     
     //Para usar el window size exacto de la aplicacion
     const [windowSize, setWindowSize] = useState<windowSize>({width: 0, height: 0})
@@ -20,6 +20,8 @@ const PieComponent: React.FC<RAMData> = (ramData) => {
             setWindowSize(result);
         });
     }, []);
+
+    
 
     return (
         
@@ -34,7 +36,7 @@ const PieComponent: React.FC<RAMData> = (ramData) => {
                 cx="50%"
                 cy="50%"
                 dataKey='value'
-                label={(entry) => `${ramData.usedRAM * 100} %`}
+                label={(entry) => `${(ramData.usedRAM * 100).toFixed(2)} %`}
             >
                 {data.map((entry, index) => (
                     //se le pondra el index dependiendo de que tanto se esta usando (to do)

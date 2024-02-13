@@ -3,3 +3,5 @@
 import {main} from '../models';
 
 export function GetWindowSize():Promise<main.WindowSize>;
+
+export function ReadRamInfo():Promise<main.RamInfo>;

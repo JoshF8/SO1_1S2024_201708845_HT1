@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	"os"
 )
 
 // App struct
@@ -15,6 +17,11 @@ type App struct {
 type WindowSize struct {
 	Width  int `json:"width"`
 	Height int `json:"height"`
+}
+
+type RamInfo struct {
+	TotalRAM uint64 `json:"totalRAM"`
+	FreeRAM  uint64 `json:"freeRAM"`
 }
 
 // NewApp creates a new App application struct
@@ -36,4 +43,17 @@ func (a *App) GetWindowSize() (WindowSize, error) {
 		Height: a.height,
 	}
 	return size, nil
+}
+
+func (a *App) ReadRamInfo() (RamInfo, error) {
+	var ramInfo RamInfo
+	data, err := os.ReadFile("/proc/testproc")
+	if err != nil {
+		return ramInfo, err
+	}
+	err = json.Unmarshal(data, &ramInfo)
+	if err != nil {
+		return ramInfo, err
+	}
+	return ramInfo, nil
 }

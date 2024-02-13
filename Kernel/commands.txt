@@ -1,0 +1,5 @@
+make
+sudo insmod main.ko time=10000
+sudo dmesg | tail
+sudo rmmod main
+sudo dmesg | tail
