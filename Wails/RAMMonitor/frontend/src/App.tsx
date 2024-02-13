@@ -11,22 +11,26 @@ const App: React.FC = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             ReadRamInfo().then((result: RAMInfo) => {
-                var usedRAM: number = 1 - (result.freeRAM / result.totalRAM);
-                var state: number
-                if (usedRAM <= 0.5) {
-                    state = 0
-                } else if (usedRAM <= 0.25) {
-                    state = 1
-                } else if (usedRAM <= 0.10) {
-                    state = 2
-                } else {
-                    state = 3
-                }
-                setRamDataVar({usedRAM:usedRAM, state: state});
+                setRamDataVar(getRamData(result));
             });
         }, 10000);
         return () => clearInterval(interval);
     }, []);
+
+    function getRamData(ramInfo: RAMInfo): RAMData {
+        var ramData: RAMData = {usedRAM: 0, state: 0};
+        ramData.usedRAM = 1 - (ramInfo.freeRAM / ramInfo.totalRAM);
+        if (ramData.usedRAM <= 0.5) {
+            ramData.state = 0
+        } else if (ramData.usedRAM <= 0.25) {
+            ramData.state = 1
+        } else if (ramData.usedRAM <= 0.10) {
+            ramData.state = 2
+        } else {
+            ramData.state = 3
+        }
+        return ramData;
+    }
 
     return (
         <div id="App">
