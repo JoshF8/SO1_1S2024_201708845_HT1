@@ -22,7 +22,7 @@ static int test_show(struct seq_file *m, void *v){
     totalRAM = memInfo.totalram * (memInfo.mem_unit >> 10);
     freeRAM = (memInfo.freeram  * memInfo.mem_unit / 1024 ) + (memInfo.bufferram * memInfo.mem_unit / 1024) + (memInfo.sharedram * memInfo.mem_unit / 1024 );
     if(aproximar){
-        freeRAM += 2200000;
+        freeRAM += 2000000;
     }
     //la imprime en el archivo proc/testproc
     seq_printf(m, "{\"totalRAM\": %lu, \"freeRAM\": %lu}\n", totalRAM, freeRAM);
